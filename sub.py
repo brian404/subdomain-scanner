@@ -1,5 +1,6 @@
 import sys
 import requests
+import time
 
 if len(sys.argv) != 2:
     print("Usage: python3 sub.py <domain>")
@@ -8,6 +9,12 @@ if len(sys.argv) != 2:
 subdomain = ""
 domain = sys.argv[1]
 
+print(f"Scanning subdomains on {domain}...\n")
+
+# Define the animation sequence
+animation = "|/-\\"
+
+# Loop through the animation while scanning subdomains
 for i in range(48, 58):
     for j in range(48, 58):
         for k in range(48, 58):
@@ -18,3 +25,10 @@ for i in range(48, 58):
                     print(f"{subdomain} ({response.status_code})")
             except:
                 pass
+
+            # Update the animation sequence
+            print(f"\rScanning subdomains on {domain}... {animation[i % len(animation)]}", end="")
+            time.sleep(0.1)
+
+# Print a newline character to ensure the prompt is on a new line
+print("\n")
